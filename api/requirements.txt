@@ -12,6 +12,7 @@ python-dotenv
 psycopg2-binary
 marshmallow-sqlalchemy
 Flask-Limiter
-pymysql
 flask-jwt-extended
 flask_jwt_extended
+sqlalchemy
+sqlalchemy-cockroachdb

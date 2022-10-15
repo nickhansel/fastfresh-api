@@ -22,7 +22,7 @@ load_dotenv()
 dev_mode = True
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://doadmin:AVNS_tyQfBta8kWnoEii3B6Z@db-postgresql-nyc3-73842-do-user-12342928-0.b.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["APISPEC_SWAGGER_UI_URL"] = "/"
 app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET_KEY')
@@ -43,9 +43,9 @@ limiter_ext = Limiter(
 )
 
 from db import * 
-from resources import *
+# from resources import *
 
-# db_ext.create_all()
+db_ext.create_all()
 
 @app.route('/add/<int:param1>/<int:param2>')
 def add(param1: int, param2: int) -> str:
