@@ -1,0 +1,17 @@
+Flask
+celery
+redis
+Flask-SQLAlchemy
+pyjwt
+flask_apispec
+flask_restful
+flask_marshmallow
+Werkzeug
+markupsafe==2.0.1
+python-dotenv
+psycopg2-binary
+marshmallow-sqlalchemy
+Flask-Limiter
+pymysql
+flask-jwt-extended
+flask_jwt_extended
