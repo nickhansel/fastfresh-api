@@ -16,3 +16,6 @@ flask-jwt-extended
 flask_jwt_extended
 sqlalchemy
 sqlalchemy-cockroachdb
+Flask-PyMongo
+pymongo[srv]
+pymongo

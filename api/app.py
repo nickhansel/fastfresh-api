@@ -15,6 +15,10 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_jwt_extended import JWTManager
 
+from pymongo import MongoClient
+
+client = MongoClient("mongodb+srv://devplace:December221963@cluster0.q735yoy.mongodb.net/?retryWrites=true&w=majority")
+
 load_dotenv()
 
 # run command: docker-compose -f docker-compose.yml -f docker-compose.development.yml up --build
@@ -43,8 +47,10 @@ limiter_ext = Limiter(
 )
 
 from db import * 
-# from resources import *
+from resources import *
 
+api.add_resource(UserResource, '/user')
+docs.register(UserResource)
 db_ext.create_all()
 
 @app.route('/add/<int:param1>/<int:param2>')
@@ -65,7 +71,7 @@ def check_task(task_id: str) -> str:
 
 @app.route('/health_check')
 def health_check() -> Response:
-    return jsonify("OK health check")
+    return jsonify("action works")
 
 @app.route('/test')
 def test() -> Response:
