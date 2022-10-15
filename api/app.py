@@ -51,6 +51,10 @@ from resources import *
 
 api.add_resource(UserResource, '/user')
 docs.register(UserResource)
+api.add_resource(ItemResource, '/item')
+docs.register(ItemResource)
+api.add_resource(SellerResource, '/seller')
+docs.register(SellerResource)
 db_ext.create_all()
 
 @app.route('/add/<int:param1>/<int:param2>')
