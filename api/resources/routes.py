@@ -118,5 +118,5 @@ class OrderResource(MethodResource):
         if not user_id or not total_price or not id or not status or not driver or not created_at or not delivered_at or not seller or not address:
             return abort(400, message="Missing data")
         else:
-            client.mydb.orders.insert_one({"total_price": total_price, "id": id, "status": status, "items": items, "driver": driver,  "created_at": created_at, "delivered_at": delivered_at, "seller": seller})
+            client.mydb.orders.insert_one({"user_id": user_id, "address": address,"total_price": total_price, "id": id, "status": status, "items": items, "driver": driver,  "created_at": created_at, "delivered_at": delivered_at, "seller": seller})
             return jsonify({"message": "Order Added"})
