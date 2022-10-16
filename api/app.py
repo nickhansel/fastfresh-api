@@ -55,7 +55,10 @@ api.add_resource(ItemResource, '/item')
 docs.register(ItemResource)
 api.add_resource(SellerResource, '/seller')
 docs.register(SellerResource)
+api.add_resource(OrderResource, '/order')
+docs.register(OrderResource)
 db_ext.create_all()
+
 
 @app.route('/add/<int:param1>/<int:param2>')
 def add(param1: int, param2: int) -> str:
