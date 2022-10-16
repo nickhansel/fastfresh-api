@@ -82,3 +82,39 @@ class SellerResource(MethodResource):
             client.mydb.sellers.insert_one({"name": name, "id": id, "address": address, "categories": categories, "fee": fee, "items": items})
             return jsonify({"message": "Seller added"})
 
+# user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+#     items = db.relationship('Item', backref='orders', lazy=True, uselist=True)
+#     total_price = db.Column(db.Float, nullable=False)
+#     status = db.Column(db.String(50), nullable=False)
+#     driver = db.Column(db.String(50), nullable=True)
+#     seller_feedback = db.Column(db.Float, nullable=True)
+#     delivered_at = db.Column(db.DateTime, nullable=True)
+#     created_at = db.Column(db.DateTime, nullable=False)
+#     seller = db.relationship('Seller', backref='orders', lazy=True, uselist=False)
+
+
+class OrderResource(MethodResource):
+    def get(self):
+        found = client.mydb.orders.find()
+        if not found: 
+            return abort(400, message="Order not found")
+        else:
+            j = [get_data(i) for i in found]
+            return jsonify(j)
+
+    @doc(description="Get a Order")
+    def post(self):
+        total_price = request.json.get('total_price')
+        items = request.json.get('items')
+        id = request.json.get('id')
+        status = request.json.get('status')
+        driver = request.json.get('driver')
+        created_at = request.json.get('created_at')
+        delivered_at = request.json.get('delivered_at')
+        seller = request.json.get('seller')
+
+        if not total_price or not id or not status or not driver or not created_at or not delivered_at or not seller:
+            return abort(400, message="Missing data")
+        else:
+            client.mydb.sellers.insert_one({"total_price": total_price, "id": id, "status": status, "items": items, "driver": driver,  "created_at": created_at, "delivered_at": delivered_at, "seller": seller})
+            return jsonify({"message": "Seller added"})
