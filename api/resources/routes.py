@@ -104,6 +104,7 @@ class OrderResource(MethodResource):
 
     @doc(description="Get a Order")
     def post(self):
+        user_id = request.json.get('user_id')
         total_price = request.json.get('total_price')
         items = request.json.get('items')
         id = request.json.get('id')
@@ -112,9 +113,10 @@ class OrderResource(MethodResource):
         created_at = request.json.get('created_at')
         delivered_at = request.json.get('delivered_at')
         seller = request.json.get('seller')
+        address = request.json.get('address')
 
-        if not total_price or not id or not status or not driver or not created_at or not delivered_at or not seller:
+        if not user_id or not total_price or not id or not status or not driver or not created_at or not delivered_at or not seller or not address:
             return abort(400, message="Missing data")
         else:
-            client.mydb.sellers.insert_one({"total_price": total_price, "id": id, "status": status, "items": items, "driver": driver,  "created_at": created_at, "delivered_at": delivered_at, "seller": seller})
-            return jsonify({"message": "Seller added"})
+            client.mydb.orders.insert_one({"total_price": total_price, "id": id, "status": status, "items": items, "driver": driver,  "created_at": created_at, "delivered_at": delivered_at, "seller": seller})
+            return jsonify({"message": "Order Added"})
